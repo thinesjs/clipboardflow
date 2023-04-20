@@ -1,0 +1,7 @@
+{
+  "name": "clipboardjs",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
