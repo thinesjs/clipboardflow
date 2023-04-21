@@ -4,14 +4,15 @@
   <ng-container>
     <ion-grid class="main-grid ion-no-padding mobile">
       <ion-row header class="ion-align-items-start ion-align-items-stretch">
-        <!-- Apspace Logo  -->
-        <ion-row class="ion-justify-content-center">
-          <ion-col size="8">
-            <img src="assets/icon/logo.png">
-          </ion-col>
-        </ion-row>
+
         <!--Form & Welcome Message-->
         <ion-col size="10" offset="1" size-md="6" offset-md="3" size-lg="4" offset-lg="4">
+        <!-- Logo  -->
+        <ion-row class="ion-justify-content-center">
+          <ion-col size="8">
+            <img class="ion-margin-top" src="assets/icon/logo.svg">
+          </ion-col>
+        </ion-row>
           <form (ngSubmit)="login()" class="ion-no-padding">
             <ion-row class="ion-align-items-start">
               <ion-col class="title-text-wrapper" size="12">
@@ -23,7 +24,7 @@
             <ion-row>
               <ion-col size="12">
                 <div input-field>
-                  <!-- Input-field-apkey -->
+                  <!-- Input-field-email -->
                   <ion-item class="ion-no-padding">
                     <ion-input type="text" [placeholder]="'Email'" [(ngModel)]="email" (keyup.enter)="login()"
                                [autofocus]="true" [required]="true" name="email"></ion-input>

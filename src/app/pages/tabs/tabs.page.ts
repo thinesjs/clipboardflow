@@ -45,10 +45,10 @@ export class TabsPage implements OnInit {
     const autoDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     if (autoDark) {
       // Change to white text logo
-      this.logo = 'assets/icon/logo-universal.png';
+      this.logo = 'assets/icon/logo-universal.svg';
     } else {
       //Change to black text logo
-      this.logo = 'assets/icon/logo-universal.png';
+      this.logo = 'assets/icon/logo-universal.svg';
     }
   }
 

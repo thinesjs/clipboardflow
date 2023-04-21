@@ -16,12 +16,12 @@ const routes: Routes = [
         // data: { role: Role.Student | Role.Lecturer | Role.Admin },
         loadChildren: () => import('../home/home.module').then( m => m.HomePageModule)
       },
-    //   {
-    //     path: 'student-timetable',
-    //     canActivate: [AuthGuard],
-    //     data: { role: Role.Student },
-    //     loadChildren: () => import('../student-timetable/student-timetable.module').then(m => m.StudentTimetablePageModule)
-    //   },
+      {
+        path: 'clipboards',
+        // canActivate: [AuthGuard],
+        // data: { role: Role.Student },
+        loadChildren: () => import('../clipboard/clipboard.module').then(m => m.ClipboardPageModule)
+      },
     //   {
     //     path: 'profile',
     //     canActivate: [AuthGuard],

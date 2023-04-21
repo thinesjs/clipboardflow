@@ -17,6 +17,10 @@ export const routes: Routes = [
     path: 'not-found',
     loadComponent: () => import('./pages/not-found/not-found.page').then( m => m.NotFoundPage)
   },
+  {
+    path: 'clipboard',
+    loadComponent: () => import('./pages/clipboard/clipboard.page').then( m => m.ClipboardPage)
+  },
   // {
   //   path: 'tabs',
   //   loadComponent: () => import('./pages/tabs/tabs.page').then( m => m.TabsPage)
