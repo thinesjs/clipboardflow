@@ -1,0 +1,191 @@
+.glob-margin-auto {
+    margin: auto !important;
+  }
+  
+  .glob-small-margin-bottom {
+    margin-bottom: 5px !important;
+  }
+  
+  .glob-small-margin-top {
+    margin-top: 5px !important;
+  }
+  
+  .glob-primary-text {
+    color: var(--ion-color-primary) !important;
+    --color: var(--ion-color-primary) !important;
+  }
+  
+  .glob-success-text {
+    color: var(--ion-color-success);
+    --color: var(--ion-color-success);
+  }
+  
+  .glob-danger-text {
+    color: var(--ion-color-danger) !important;
+    --color: var(--ion-color-danger) !important;
+  }
+  
+  .glob-border-radius {
+    border-radius: 15px !important;
+  }
+  
+  .glob-text-bold {
+    font-weight: 900 !important;
+  }
+  
+  .glob-fw-600 {
+    font-weight: 600 !important;
+  }
+  
+  .glob-white-space-normal {
+    white-space: normal !important;
+  }
+  
+  .glob-text-underline {
+    text-decoration: underline;
+  }
+  
+  .glob-full-page-modal {
+    --width: 100%;
+    --height: 100%;
+  }
+  
+  .glob-popover {
+    --width: 70% !important;
+  }
+  
+  .glob-calendar {
+    background-color: var(--secondary-bg-color) !important;
+    padding: 0 !important;
+  
+    .month-packer-item {
+      button {
+        color: var(--ion-text-color) !important;
+      }
+  
+      &.this-month {
+        button {
+          border-color: var(--ion-color-primary) !important;
+          color: var(--ion-color-primary) !important;
+        }
+      }
+    }
+  
+    .days-btn {
+      p {
+        color: var(--ion-text-color) !important;
+      }
+  
+      &[disabled] p {
+        color: var(--ion-color-medium) !important;
+      }
+  
+      &.today p {
+        color: var(--ion-color-primary-shade) !important;
+      }
+  
+      &.on-selected {
+        background: var(--ion-color-primary) !important;
+  
+        p {
+          color: var(--ion-text-color) !important;
+        }
+      }
+  
+      &.available {
+        background: var(--ion-color-success) !important;
+  
+        &.on-selected {
+          background-color: transparent !important;
+          border: 3px solid var(--ion-color-success) !important;
+  
+          p {
+            color: var(--ion-color-success) !important;
+          }
+        }
+      }
+  
+      &.booked {
+        background: var(--ion-color-danger) !important;
+  
+        &.on-selected {
+          background-color: transparent !important;
+          border: 3px solid var(--ion-color-danger) !important;
+  
+          p {
+            color: var(--ion-color-danger) !important;
+          }
+        }
+      }
+  
+      &.partially-booked {
+        background: var(--ion-color-warning) !important;
+  
+        &.on-selected {
+          background-color: transparent !important;
+          border: 3px solid var(--ion-color-warning) !important;
+  
+          p {
+            color: var(--ion-color-warning) !important;
+          }
+        }
+      }
+  
+      &.attendance {
+        background: var(--ion-color-primary) !important;
+  
+        &.on-selected {
+          background-color: transparent !important;
+          border: 3px solid var(--ion-color-primary) !important;
+  
+          p {
+            color: var(--ion-color-primary) !important;
+          }
+        }
+      }
+  
+      &.holidays {
+        background: var(--ion-color-primary) !important;
+  
+        &.on-selected {
+          background-color: transparent !important;
+          border: 3px solid var(--ion-color-primary) !important;
+  
+          p {
+            color: var(--ion-color-primary) !important;
+          }
+        }
+      }
+    }
+  
+    &.filter-date-picker {
+      .days-btn.today p {
+        color: var(--ion-color-medium) !important;
+      }
+  
+      .days-btn.today.colored p {
+        color: var(--ion-text-color) !important;
+      }
+  
+      .days-btn.on-selected {
+        background-color: transparent !important;
+      }
+    }
+  }
+  
+  ion-modal.virtual-card-modal {
+    --background: transparent !important;
+    --box-shadow: none;
+    --backdrop-opacity: .9;
+  }
+  
+  ion-select-popover {
+    overflow: scroll !important;
+  }
+  
+  @media screen and (max-width: 750px) {
+    .glob-popover {
+      --width: 100% !important;
+    }
+  }
+  
