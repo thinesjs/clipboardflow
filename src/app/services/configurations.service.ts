@@ -24,6 +24,12 @@ export class ConfigurationsService {
     });
   }
 
+  get comingFromTabs():boolean {
+    if (this.router.url.split('/')[1].split('/')[0] === 'tabs'){
+      return true;
+    }
+  }
+
   /**
    * Get Current Status of Network
    */

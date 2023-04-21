@@ -7,25 +7,31 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./tabs/tabs.routes').then((m) => m.routes),
+    redirectTo: 'tabs',
+    pathMatch: 'full'
   },
-  // {
-  //   path: '',
-  //   redirectTo: 'tabs',
-  //   pathMatch: 'full'
-  // },
-//   {
-//     // Don't need AuthGuard as this page can be accessible from Login
-//     path: 'graduate-verification-service',
-//     // loadChildren: () => import('./pages/graduate-verification-service/graduate-verification-service.module').then(m => m.GraduateVerificationServicePageModule)
-//   },
-//   { // this path must always be at the end of the routes array
-//     path: '**',
-//     canActivate: [AuthGuard],
-//     data: { role: Role.Student | Role.Lecturer | Role.Admin },
-//     // loadChildren: () => import('./pages/not-found/not-found.module').then(m => m.NotFoundPageModule)
-//   }
-
+  {
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then((m) => m.LoginPageModule),
+  },
+  {
+    path: 'tabs',
+    // canActivate: [AuthGuard],
+    // data: { role: Role.Student | Role.Lecturer | Role.Admin },
+    loadChildren: () => import('./pages/tabs/tabs.module').then(m => m.TabsPageModule)
+  },
+  {
+    path: 'home',
+    // canActivate: [AuthGuard],
+    // data: { role: Role.Student | Role.Lecturer | Role.Admin },
+    loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule)
+  },
+  {
+    path: '**',
+    // canActivate: [AuthGuard],
+    // data: { role: Role.Student | Role.Lecturer | Role.Admin },
+    loadChildren: () => import('./pages/not-found/not-found.module').then(m => m.NotFoundPageModule)
+  },
 ];
 
 @NgModule({

@@ -1,0 +1,54 @@
+<ion-header *ngIf="!hideHeader">
+  <ion-toolbar>
+    <ion-title>
+      Home
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" pullMax="400" pullMin="60">
+    <ion-refresher-content refreshing-spinner="dots" pullingIcon="refresh"></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="glob-container">
+    <ion-row>
+      <ion-col size-xs="12" size-md="4" push-md="8">
+        <ion-card class="ion-no-margin ion-margin-top sticky">
+          <ion-card-header class="ion-text-center">
+            <ion-card-subtitle color="medium" class="glob-text-bold">
+              Balance
+            </ion-card-subtitle>
+            <ng-container>
+              <!-- Balance may return 0 which is a falsy value therefore need to check "undefined" instead -->
+              <ion-card-title class="glob-text-bold" color="success">
+                RM 2
+              </ion-card-title>
+              <ng-template #loadBalance>
+                <ion-card-title>
+                  <ion-skeleton-text class="glob-margin-auto" animated style="line-height: 25px; width: 30%;">
+                  </ion-skeleton-text>
+                </ion-card-title>
+              </ng-template>
+            </ng-container>
+            <ng-template #none>
+              <ion-card-title class="glob-text-bold" color="danger">
+                RM 0.00
+              </ion-card-title>
+            </ng-template>
+            <ion-button class="ion-margin-top" size="small">
+              Scan QR
+              <ion-icon slot="end" name="print"></ion-icon>
+            </ion-button>
+          </ion-card-header>
+
+          <ion-progress-bar color="success"
+            [value]="1"></ion-progress-bar>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>
