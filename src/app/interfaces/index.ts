@@ -1,0 +1,1 @@
+export { VersionValidator } from './version-validator';
