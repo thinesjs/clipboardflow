@@ -8,21 +8,16 @@ ClipboardFlow is an web and mobile application to seamlessly share clipboards wh
 
 Currently, ClipboardFlow is still in local development. 
 
-## TODO
+## To-DO
 
-**API**
-Authentication API - DONE
-Create Clipboard API - DONE
-Retrive Clipboard by Owner ID API - 
-Update Clipboard API - 
-Delete Clipboard API- 
+| API             | APP                                                                |
+| ----------------- | ------------------------------------------------------------------ |
+| Authentication API - ✅ | Authentication - ✅ |
+| Create Clipboard API - ✅ | Create Clipboard - ❌ |
+| Retrive Clipboard by Owner ID API - ❌ | Retrive Clipboard by Owner ID - ❌ |
+| Update Clipboard API - ❌ | Update Clipboard - ❌ |
+| Delete Clipboard API - ❌ | Delete Clipboard - ❌ |
 
-**App**
-Authentication - DONE
-Create Clipboard - 
-Retrive Clipboard by Owner ID - 
-Update Clipboard - 
-Delete Clipboard - 
     
 ## License
 
