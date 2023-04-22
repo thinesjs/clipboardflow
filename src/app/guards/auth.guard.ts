@@ -27,7 +27,10 @@ export class AuthGuard implements CanActivate {
         if (!user) {
           if (state.url.indexOf("login") != -1) {
             return true;
-          } else {
+          }else if(state.url.indexOf("register") != -1){
+            return true;
+          } 
+          else {
             this.router.navigateByUrl("/login");
             return false;
           }
@@ -35,7 +38,11 @@ export class AuthGuard implements CanActivate {
           if(state.url.indexOf("login") != -1){
             this.router.navigateByUrl("/tabs");
             return false;
-          }else{
+          }else if(state.url.indexOf("register") != -1){
+            this.router.navigateByUrl("/tabs");
+            return false;
+          }
+          else{
              return true;
           }
         }

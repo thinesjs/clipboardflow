@@ -2,17 +2,18 @@
 
   <!--Mobile Version-->
   <ng-container>
-    <ion-grid class="main-grid mobile">
+    <ion-grid class="main-grid ion-no-padding mobile">
       <ion-row header class="ion-align-items-start ion-align-items-stretch">
+
         <!--Form & Welcome Message-->
-        <ion-col size="10" offset="1" size-md="6" offset-md="3" size-lg="4" offset-lg="4" >
+        <ion-col size="10" offset="1" size-md="6" offset-md="3" size-lg="4" offset-lg="4">
         <!-- Logo  -->
         <ion-row class="ion-justify-content-center">
           <ion-col size="5">
             <img class="ion-margin-top" src="assets/icon/logo.svg">
           </ion-col>
         </ion-row>
-          <form (ngSubmit)="login()" class="ion-no-padding">
+          <form (ngSubmit)="register()" class="ion-no-padding">
             <ion-row class="ion-align-items-start">
               <ion-col class="title-text-wrapper" size="12">
                 <ng-container ></ng-container>
@@ -23,20 +24,30 @@
             <ion-row>
               <ion-col size="12">
                 <div input-field>
+                  <ion-item class="ion-no-padding">
+                    <ion-input type="text" [placeholder]="'Username'" [(ngModel)]="username" (keyup.enter)="register()"
+                               [autofocus]="true" [required]="true" name="username"></ion-input>
+                  </ion-item>
                   <!-- Input-field-email -->
                   <ion-item class="ion-no-padding">
-                    <ion-input type="text" [placeholder]="'Email'" [(ngModel)]="email" (keyup.enter)="login()"
+                    <ion-input type="email" [placeholder]="'Email'" [(ngModel)]="email" (keyup.enter)="register()"
                                [autofocus]="true" [required]="true" name="email"></ion-input>
                   </ion-item>
                   <!-- Input-field-password -->
                   <ion-item class="ion-no-padding">
                     <ion-input class="ion-padding-start" [type]="showPassword ? 'text' : 'password'"
-                               [placeholder]="'Password'" [(ngModel)]="password" clear-on-edit="false" (keyup.enter)="login()"
+                               [placeholder]="'Password'" [(ngModel)]="password" clear-on-edit="false" (keyup.enter)="register()"
                                [required]="true" name="password">
                     </ion-input>
                     <ion-button type="button" clear slot="end" (click)="showPassword = !showPassword">
                       <ion-icon name="eye"></ion-icon>
                     </ion-button>
+                  </ion-item>
+                  <ion-item class="ion-no-padding">
+                    <ion-input class="ion-padding-start" [type]="showPassword ? 'text' : 'password'"
+                               [placeholder]="'Repeat Password'" [(ngModel)]="rpassword" clear-on-edit="false" (keyup.enter)="register()"
+                               [required]="true" name="rpassword">
+                    </ion-input>
                   </ion-item>
                 </div>
                 <!-- Login Button -->
@@ -44,7 +55,7 @@
                   <ion-button type="submit" class="login-button ion-no-margin"
                               [attr.color]="userDidLogin && userUnauthenticated ? 'danger' : userDidLogin && userAuthenticated? 'success': 'primary'"
                               [class.btn_center]="userDidLogin && (userUnauthenticated || loginProcessLoading || userAuthenticated)">
-                    <span *ngIf="!userDidLogin" class="ion-text-capitalize">Log In</span>
+                    <span *ngIf="!userDidLogin" class="ion-text-capitalize">Register</span>
                     <!-- LOADING -->
                     <ion-icon *ngIf="!userDidLogin" name="log-in" slot="end" size="large"></ion-icon>
                     <span *ngIf="userDidLogin && loginProcessLoading">
@@ -65,7 +76,7 @@
                   <ion-row>
                     <!-- Timetable Link -->
                     <ion-col size="12" class="ion-no-padding ion-margin-top">
-                      <p class="ion-no-margin ion-no-padding">New here? <a routerLink="/register" routerDirection="forward">Get registered!</a> </p>
+                      <p class="ion-no-margin ion-no-padding">Already a member? <a routerLink="/login" routerDirection="forward">Login Now!</a> </p>
                     </ion-col>
                   </ion-row>
                 </div>

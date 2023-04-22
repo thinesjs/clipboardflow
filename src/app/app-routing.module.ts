@@ -10,6 +10,11 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'register',
+    canActivate:[AuthGuard],
+    loadChildren: () => import('./pages/register/register.module').then((m) => m.RegisterPageModule),
+  },
+  {
     path: 'login',
     canActivate:[AuthGuard],
     loadChildren: () => import('./pages/login/login.module').then((m) => m.LoginPageModule),
@@ -32,12 +37,12 @@ const routes: Routes = [
     // data: { role: Role.Student | Role.Lecturer | Role.Admin },
     loadChildren: () => import('./pages/clipboard/clipboard.module').then(m => m.ClipboardPageModule)
   },
-  // {
-  //   path: 'profile',
-  //   canActivate: [AuthGuard],
-  //   // data: { role: Role.Student | Role.Lecturer | Role.Admin },
-  //   loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfilePageModule)
-  // },
+  {
+    path: 'profile',
+    canActivate: [AuthGuard],
+    // data: { role: Role.Student | Role.Lecturer | Role.Admin },
+    loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfilePageModule)
+  },
   {
     path: 'logout',
     canActivate: [AuthGuard],

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Platform } from '@ionic/angular'
+import { NavController, Platform } from '@ionic/angular'
 import { Storage } from '@ionic/storage-angular';
 import { BehaviorSubject, Observable, from, of, throwError } from "rxjs";
 import { map, switchMap } from "rxjs/operators";
@@ -20,7 +20,8 @@ export class AuthService {
     private readonly storage: Storage,
     private readonly platform: Platform,
     private readonly http: HttpClient,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private navCtrl: NavController,
   ) { this.loadUserInfo(); }
 
   loadUserInfo() {
@@ -51,7 +52,7 @@ export class AuthService {
         email:  email,
         password: password
       };
-      return this.http.post("http://clipboardflow.tjsserver.xyz/api/auth/login",payload).pipe(
+      return this.http.post("https://clipboardflow.tjsserver.xyz/api/auth/login",payload).pipe(
       map((response:any)=>{
         // console.log(response);
         this.storage.set('access_token',response.access_token);
@@ -64,5 +65,23 @@ export class AuthService {
     }
     
     return of(false);
+  }
+
+  useRegister(username: string, email: string, password: string): Observable<boolean> {
+    if(email && password){
+      var payload={
+        username: username,
+        email:  email,
+        password: password
+      };
+      return this.http.post("https://clipboardflow.tjsserver.xyz/api/auth/register",payload).pipe(
+      map((response:any)=>{
+        if (response.status.includes("success")) return true
+        return false;
+      })
+      )
     }
+    
+    return of(false);
+  }
 }

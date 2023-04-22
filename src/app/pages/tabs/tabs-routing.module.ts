@@ -22,12 +22,12 @@ const routes: Routes = [
         // data: { role: Role.Student },
         loadChildren: () => import('../clipboard/clipboard.module').then(m => m.ClipboardPageModule)
       },
-      // {
-      //   path: 'profile',
-      //   canActivate: [AuthGuard],
-      //   // data: { role: Role.Lecturer | Role.Admin },
-      //   loadChildren: () => import('../profile/profile.module').then(m => m.ProfilePageModule)
-      // },
+      {
+        path: 'profile',
+        canActivate: [AuthGuard],
+        // data: { role: Role.Lecturer | Role.Admin },
+        loadChildren: () => import('../profile/profile.module').then(m => m.ProfilePageModule)
+      },
       {
         path: '',
         redirectTo: 'home',

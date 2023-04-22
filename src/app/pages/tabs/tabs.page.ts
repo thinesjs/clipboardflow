@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
-import { IonTabs, IonContent, Platform, ModalController } from '@ionic/angular';
+import { IonTabs, IonContent, Platform, ModalController, NavController } from '@ionic/angular';
 import { TabItem } from './tab-item';
 import { TabItems } from '../../constants';
 import { ComponentService } from 'src/app/services';
@@ -20,6 +20,7 @@ export class TabsPage implements OnInit {
   theme$: Observable<string>;
 
   constructor(
+    private navCtrl: NavController,
     private component: ComponentService
   ) { }
 
@@ -39,6 +40,10 @@ export class TabsPage implements OnInit {
   @HostListener('window:resize', ['$event'])
   onResize() {
     this.smallScreen = window.innerWidth <= 720;
+  }
+
+  logout(){
+    this.navCtrl.navigateRoot('/logout', { replaceUrl: true });
   }
 
   checkLogoType(){
