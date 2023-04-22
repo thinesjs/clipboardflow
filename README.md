@@ -8,7 +8,7 @@ ClipboardFlow is an web and mobile application to seamlessly share clipboards wh
 
 Currently, ClipboardFlow is still in local development. 
 
-## To-DO
+## To-Do
 
 | API             | APP                                                                |
 | ----------------- | ------------------------------------------------------------------ |
