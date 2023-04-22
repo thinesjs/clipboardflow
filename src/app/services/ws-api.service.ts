@@ -14,7 +14,7 @@ import { ConfigurationsService } from './configurations.service';
 })
 export class WsApiService {
 
-  private apiUrl = 'https://api.apiit.edu.my';
+  private apiUrl = 'http://clipboardflow.tjsserver.xyz/api/';
 
   constructor(
     public http: HttpClient,

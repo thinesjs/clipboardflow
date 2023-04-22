@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-
+import { AuthService } from '../../services/auth.service';
 import SwiperCore, { Autoplay, Lazy, Navigation } from 'swiper';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -38,10 +38,16 @@ export class LoginPage implements OnInit {
   currentYear = new Date().getFullYear();
   isMobile = false;
 
+  loginForm = {
+    email:'',
+    password:''
+  };
+
   constructor(
     private platform: Platform,
     private component: ComponentService,
-    private configuration: ConfigurationsService
+    private configuration: ConfigurationsService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -49,6 +55,7 @@ export class LoginPage implements OnInit {
   }
 
   login() { 
+    
     this.userDidLogin = true;
     this.loginProcessLoading = true;
 
@@ -68,7 +75,19 @@ export class LoginPage implements OnInit {
       if (this.platform.is('capacitor') && !this.configuration.connectionStatus) {
         this.component.toastMessage('You are offline. Check internet connection!', 'danger')
       }
-      // authenticate to server
+
+      // authenticate to server (tjsserver.xyz)
+      this.authService.useLogin(this.email, this.password)
+      .subscribe(value => {
+        if(value){
+          alert('login success');
+        }
+        else{
+          alert('login fails')
+        }
+      },error => {
+        alert('login fails')
+      })
 
       
     }
