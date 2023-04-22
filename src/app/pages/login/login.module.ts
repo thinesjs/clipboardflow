@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { AuthService } from '../../services/auth.service';
 import { LoginPageRoutingModule } from './login-routing.module';
 import { LoginPage } from './login.page';
+import { StorageService } from 'src/app/services/storage.service';
 // import { SwiperModule } from 'swiper/angular';
 // import { OperationHoursFilterPipe } from './operation-hours-filter/operation-hours-filter.pipe';
 // import { TimeFormatterPipe } from './time-formatter/time-formatter.pipe';
@@ -18,7 +19,7 @@ import { LoginPage } from './login.page';
         IonicModule,
         LoginPageRoutingModule,
         ReactiveFormsModule,
-        // SwiperModule,
+        // StorageService,
         // ComponentsModule
     ],
     exports: [],

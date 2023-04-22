@@ -7,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { registerLocaleData } from '@angular/common';
 import localEn from '@angular/common/locales/en';
 import localeEnExtra from '@angular/common/locales/extra/en';
-
+// import { AuthGuard } from './guards/auth.guard';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { Badge } from '@awesome-cordova-plugins/badge/ngx';
 // import { NgChartsModule } from 'ng2-charts';
@@ -26,7 +26,6 @@ registerLocaleData(localEn, 'en-US', localeEnExtra);
     AppRoutingModule,
     HttpClientModule,
     IonicStorageModule.forRoot(),
-    // NgChartsModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

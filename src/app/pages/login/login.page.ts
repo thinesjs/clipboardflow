@@ -47,7 +47,9 @@ export class LoginPage implements OnInit {
     private platform: Platform,
     private component: ComponentService,
     private configuration: ConfigurationsService,
-    private authService: AuthService
+    private authService: AuthService,
+    private route: ActivatedRoute,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -80,13 +82,34 @@ export class LoginPage implements OnInit {
       this.authService.useLogin(this.email, this.password)
       .subscribe(value => {
         if(value){
-          alert('login success');
+          this.loginProcessLoading = false;
+          this.userAuthenticated = true;
+
+          setTimeout(() => {
+            // Show the success message for 300 ms after completing the request
+            const url = this.route.snapshot.queryParams.redirect || '/';
+            this.router.navigateByUrl(url, {replaceUrl: true});
+          }, 300);
         }
         else{
-          alert('login fails')
+          this.loginProcessLoading = false;
+          this.userUnauthenticated = true;
+
+          this.component.toastMessage('You have entered an invalid email or password.', 'danger');
+          return throwError(() => new Error('Invalid email or password'));
         }
       },error => {
-        alert('login fails')
+        if (error.error.msg.includes('Email or password is incorrect!')) {
+          this.component.toastMessage('You have entered an invalid email or password.', 'danger');
+          this.loginProcessLoading = false;
+          this.userUnauthenticated = true;
+          setTimeout(() => {
+            this.userUnauthenticated = false;
+            this.userDidLogin = false;
+          }, 1000);
+          return throwError(() => new Error('Invalid email or password'));
+        }
+        // console.log(error.error.msg)
       })
 
       

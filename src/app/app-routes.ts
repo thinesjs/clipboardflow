@@ -21,6 +21,14 @@ export const routes: Routes = [
     path: 'clipboard',
     loadComponent: () => import('./pages/clipboard/clipboard.page').then( m => m.ClipboardPage)
   },
+  {
+    path: 'logout',
+    loadComponent: () => import('./pages/logout/logout.page').then( m => m.LogoutPage)
+  },
+  {
+    path: 'profile',
+    loadComponent: () => import('./pages/profile/profile.page').then( m => m.ProfilePage)
+  },
   // {
   //   path: 'tabs',
   //   loadComponent: () => import('./pages/tabs/tabs.page').then( m => m.TabsPage)

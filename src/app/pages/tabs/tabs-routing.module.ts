@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 // import { Role } from '../../interfaces';
-// import { AuthGuard } from '../../guards';
+import { AuthGuard } from '../../guards/auth.guard';
 import { TabsPage } from './tabs.page';
 
 const routes: Routes = [
@@ -12,47 +12,22 @@ const routes: Routes = [
     children: [
       {
         path: 'home',
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
         // data: { role: Role.Student | Role.Lecturer | Role.Admin },
         loadChildren: () => import('../home/home.module').then( m => m.HomePageModule)
       },
       {
         path: 'clipboards',
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
         // data: { role: Role.Student },
         loadChildren: () => import('../clipboard/clipboard.module').then(m => m.ClipboardPageModule)
       },
-    //   {
-    //     path: 'profile',
-    //     canActivate: [AuthGuard],
-    //     // tslint:disable-next-line:no-bitwise
-    //     data: { role: Role.Lecturer | Role.Admin },
-    //     loadChildren: () => import('../profile/profile.module').then(m => m.ProfilePageModule)
-    //   },
-    //   {
-    //     path: 'attendance',
-    //     canActivate: [AuthGuard],
-    //     data: { role: Role.Student },
-    //     loadChildren: () => import('../attendance/attendance.module').then(m => m.AttendancePageModule)
-    //   },
-    //   {
-    //     path: 'apcard',
-    //     canActivate: [AuthGuard],
-    //     data: { role: Role.Student | Role.Lecturer | Role.Admin },
-    //     loadChildren: () => import('../apcard/apcard.module').then(m => m.ApcardPageModule)
-    //   },
-    //   {
-    //     canActivate: [AuthGuard],
-    //     data: { role: Role.Lecturer },
-    //     path: 'lecturer-timetable',
-    //     loadChildren: () => import('../lecturer-timetable/lecturer-timetable.module').then(m => m.LecturerTimetablePageModule)
-    //   },
-    //   {
-    //     path: 'more',
-    //     canActivate: [AuthGuard],
-    //     data: { role: Role.Student | Role.Lecturer | Role.Admin },
-    //     loadChildren: () => import('../more/more.module').then(m => m.MorePageModule)
-    //   },
+      // {
+      //   path: 'profile',
+      //   canActivate: [AuthGuard],
+      //   // data: { role: Role.Lecturer | Role.Admin },
+      //   loadChildren: () => import('../profile/profile.module').then(m => m.ProfilePageModule)
+      // },
       {
         path: '',
         redirectTo: 'home',
