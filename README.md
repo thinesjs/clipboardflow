@@ -13,8 +13,8 @@ Currently, ClipboardFlow is still in local development.
 | API             | APP                                                                |
 | ----------------- | ------------------------------------------------------------------ |
 | Authentication API - ✅ | Authentication - ✅ |
-| Create Clipboard API - ✅ | Create Clipboard - ❌ |
-| Retrive Clipboard by Owner ID API - ❌ | Retrive Clipboard by Owner ID - ❌ |
+| Create Clipboard API - ✅ | Create Clipboard - ✅ |
+| Retrive Clipboard by Owner ID API - ✅ | Retrive Clipboard by Owner ID - ❌ |
 | Update Clipboard API - ❌ | Update Clipboard - ❌ |
 | Delete Clipboard API - ❌ | Delete Clipboard - ❌ |
 
