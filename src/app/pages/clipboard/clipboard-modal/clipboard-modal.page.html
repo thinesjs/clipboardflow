@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ng-container *ngIf="(clipboardData$ | async) as clipboard;">
+      <ion-title>{{ clipboard.clipboard_title }}</ion-title>
+    </ng-container>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()"><ion-icon name="close-outline"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-refresher slot="fixed" pullMax="400" pullMin="60" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content refreshing-spinner="dots" pullingIcon="refresh"></ion-refresher-content>
+  </ion-refresher>
+
+  <ng-container *ngIf="(clipboardData$ | async) as clipboard;">
+    <ng-container *ngIf="clipboard.messages[0].id != null; else noClipboard">
+      <ion-list>
+        <ion-item *ngFor="let item of clipboard.messages; let isLast = last" [lines]="isLast ? 'none' : 'full'">
+          <ion-buttons slot="end">
+            <ion-button (click)="writeToClipboard(item.message)"><ion-icon name="copy-outline"></ion-icon></ion-button>
+          </ion-buttons>
+          <ion-label>
+            <h2>{{ item.message }}</h2>
+            <p>Pasted on {{ item.created_on | date: "dd MMM yyyy - HH:MM a" }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ng-container>
+    <ng-template #noClipboard>
+      <ion-card class="ion-margin-top">
+        <ion-card-content>
+          <message-with-svg imageUrl="assets/img/empty.svg"
+            messageTitle="It's empty here!" wrapperSize="4" [advancedMode]="true">
+            <div class="flex-container ion-margin-top">
+              <h3 class="ion-text-center">Looks like you not pasted anything yet..</h3>
+            </div>
+          </message-with-svg>
+        </ion-card-content>
+      </ion-card>
+    </ng-template>
+  </ng-container>
+</ion-content>

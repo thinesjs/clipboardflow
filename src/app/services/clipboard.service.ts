@@ -3,7 +3,7 @@ import { ConfigurationsService } from './configurations.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Storage } from '@ionic/storage-angular';
 import { Observable, from, map, switchMap } from 'rxjs';
-import { AddClipboard, Clipboards } from '../interfaces/clipboards';
+import { AddClipboard, ClipboardPastes, Clipboards } from '../interfaces/clipboards';
 import { AuthService } from './auth.service';
 import { Platform } from '@ionic/angular';
 
@@ -13,8 +13,7 @@ import { Platform } from '@ionic/angular';
 export class ClipboardService {
   
   baseUrlByUser = 'https://clipboardflow.tjsserver.xyz/api/clipboard/user'; 
-  baseUrlAddClipboard = 'https://clipboardflow.tjsserver.xyz/api/clipboard/' //post payload - title
-  baseUrlAddPaste = 'https://clipboardflow.tjsserver.xyz/api/clipboard/{id}' //post payload  - text
+  baseUrlGetClipboard = 'https://clipboardflow.tjsserver.xyz/api/clipboard';
 
   token = null;
   userid = null;
@@ -32,18 +31,6 @@ export class ClipboardService {
     this.userid = await this.authService.getUserID();
   }
 
-  addClipboard(title: string) :Observable<AddClipboard> {
-    const httpOptions = {
-      headers: {
-        'Authorization': `Bearer ${this.token}`
-      }
-    }
-    const params = {
-      'title': `${title}`,
-    };
-    return this.http.post<AddClipboard>(`${this.baseUrlAddClipboard}`, httpOptions);
-  }
-
   getClipboardsByUser() :Observable<Clipboards[]> {
     const httpOptions = {
       headers: {
@@ -53,9 +40,13 @@ export class ClipboardService {
     return this.http.get<Clipboards[]>(`${this.baseUrlByUser}/${this.userid}`, httpOptions);
   }
 
-  getClipboardPastes()
-  {
-
+  getClipboardPastes(clipboardId :string):Observable<ClipboardPastes[]> {
+    const httpOptions = {
+      headers: {
+        'Authorization': `Bearer ${this.token}`
+      }
+    }
+    return this.http.get<ClipboardPastes[]>(`${this.baseUrlGetClipboard}/${clipboardId}`, httpOptions);
   }
 }
   

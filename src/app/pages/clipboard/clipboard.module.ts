@@ -6,6 +6,7 @@ import { IonicModule } from '@ionic/angular';
 import { ClipboardPageRoutingModule } from './clipboard-routing.module';
 import { ClipboardPage } from './clipboard.page';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { ClipboardModalPageModule } from './clipboard-modal/clipboard-modal.module';
 
 @NgModule({
     imports: [
@@ -13,7 +14,8 @@ import { ComponentsModule } from 'src/app/components/components.module';
         FormsModule,
         IonicModule,
         ClipboardPageRoutingModule,
-        ComponentsModule
+        ClipboardModalPageModule,
+        ComponentsModule,
     ],
     exports: [],
     declarations: [ClipboardPage]
