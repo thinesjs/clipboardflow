@@ -7,6 +7,7 @@ import { ClipboardService } from 'src/app/services/clipboard.service';
 import { Observable, finalize } from 'rxjs';
 import { ClipboardPastes } from 'src/app/interfaces/clipboards';
 import { Clipboard } from '@capacitor/clipboard';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-clipboard-modal',
@@ -16,7 +17,13 @@ import { Clipboard } from '@capacitor/clipboard';
 export class ClipboardModalPage implements OnInit {
 
   @Input() clipboardCode: string;
+  clipboardText: string;
   clipboardData$: Observable<ClipboardPastes[]>;
+
+  userDidAddText = false;
+  addingProcessing = false;
+  addingSuccess = false;
+  addingFailed = false;
 
   constructor(
     private config: ConfigurationsService,
@@ -32,6 +39,56 @@ export class ClipboardModalPage implements OnInit {
   ionViewDidEnter(){
     // console.log("hey")
     this.doRefresh();
+  }
+
+  login(){}
+
+  addToClipboard() {
+    this.userDidAddText = true;
+    this.addingProcessing = true;
+
+    if(!this.clipboardText){
+      this.addingProcessing = false;
+      this.userDidAddText = false;
+      this.component.toastMessage('Text cannot be empty!', 'danger')
+    }else{
+      const body = new HttpParams({ fromObject: { "text": this.clipboardText } });
+      this.apiService.post<any>(`/clipboard/${this.clipboardCode}`, {
+        body
+      })
+        .subscribe({
+          next: () => {
+            this.addingProcessing = false;
+            this.addingSuccess = true;
+  
+            this.doRefresh();
+            this.clipboardText = "";
+  
+            this.component.toastMessage(
+              'Text added successfully!',
+              'success'
+            );
+          },
+          error: (err) => {
+            this.addingProcessing = false;
+            this.addingFailed = true;
+            
+  
+            this.doRefresh();
+  
+            this.component.toastMessage(
+              err.status + ': ' + err.error.error,
+              'danger'
+            );
+          },
+          complete: () => {
+            setTimeout(() => {
+              this.addingFailed = false;
+              this.userDidAddText = false;
+            }, 3000);
+          }
+        });
+    }    
   }
 
   doRefresh(event?) {

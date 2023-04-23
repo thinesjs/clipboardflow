@@ -14,10 +14,14 @@ Currently, ClipboardFlow is still in local development.
 | ----------------- | ------------------------------------------------------------------ |
 | Authentication API - ✅ | Authentication - ✅ |
 | Create Clipboard API - ✅ | Create Clipboard - ✅ |
-| Retrive Clipboard by Owner ID API - ✅ | Retrive Clipboard by Owner ID - ❌ |
+| Retrive Clipboard by Owner ID API - ✅ | Retrive Clipboard by Owner ID - ✅ |
 | Update Clipboard API - ❌ | Update Clipboard - ❌ |
 | Delete Clipboard API - ❌ | Delete Clipboard - ❌ |
+| Profile - ✅ | Profile - ❌ |
 
+## Known Issues
+
+1. Ionic Storage bug - A reload is necessary for the API to function corrently after logging in
     
 ## License
 

@@ -3,26 +3,53 @@
     <ng-container *ngIf="(clipboardData$ | async) as clipboard;">
       <ion-title>{{ clipboard.clipboard_title }}</ion-title>
     </ng-container>
+    <ng-template #loadClipboard>
+      <ion-progress-bar type="indeterminate"></ion-progress-bar>
+    </ng-template>
     <ion-buttons slot="end">
       <ion-button (click)="dismiss()"><ion-icon name="close-outline"></ion-icon></ion-button>
     </ion-buttons>
   </ion-toolbar>
+
 </ion-header>
 <ion-content>
   <ion-refresher slot="fixed" pullMax="400" pullMin="60" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content refreshing-spinner="dots" pullingIcon="refresh"></ion-refresher-content>
   </ion-refresher>
 
-  <ng-container *ngIf="(clipboardData$ | async) as clipboard;">
+  <ng-container *ngIf="(clipboardData$ | async) as clipboard; else loadClipboard">
     <ng-container *ngIf="clipboard.messages[0].id != null; else noClipboard">
+      <ion-item class="ion-margin-bottom ion-margin-top ion-no-padding">
+        <ion-input [placeholder]="'Add text to '+clipboard.clipboard_title" [(ngModel)]="clipboardText" clear-on-edit="false" (keyup.enter)="addToClipboard()"[required]="true" name="clipboardText"></ion-input>
+        <ion-button type="button" clear slot="end" (click)="addToClipboard()"
+                [attr.color]="userDidAddText && addingFailed ? 'danger' : userDidAddText && addingSuccess? 'success': 'primary'"
+                [class.btn_center]="userDidAddText && (addingFailed || addingProcessing || addingSuccess)"
+                [disabled]="userDidAddText && addingFailed ? 'true' : userDidAddText && addingSuccess? 'true': 'false'">
+    
+    
+          <ion-icon *ngIf="!userDidAddText" name="add-outline"></ion-icon>
+    
+          <span *ngIf="userDidAddText && addingProcessing">
+            <ion-spinner name="dots"></ion-spinner>
+          </span>
+          <span *ngIf="userDidAddText && addingSuccess">
+            <ion-icon name="checkmark-circle-outline" slot="end"></ion-icon>
+          </span>
+          <span *ngIf="userDidAddText && addingFailed">
+            <ion-icon name="close-circle-outline" slot="end"></ion-icon>
+          </span>
+        </ion-button>
+      </ion-item>
       <ion-list>
         <ion-item *ngFor="let item of clipboard.messages; let isLast = last" [lines]="isLast ? 'none' : 'full'">
           <ion-buttons slot="end">
-            <ion-button (click)="writeToClipboard(item.message)"><ion-icon name="copy-outline"></ion-icon></ion-button>
+            <ion-button (click)="writeToClipboard(item.message)">
+              <ion-icon name="copy-outline"></ion-icon>
+            </ion-button>
           </ion-buttons>
           <ion-label>
             <h2>{{ item.message }}</h2>
-            <p>Pasted on {{ item.created_on | date: "dd MMM yyyy - HH:MM a" }}</p>
+            <p>Added on {{ item.created_on | date: "dd MMM yyyy - HH:MM a" }}</p>
           </ion-label>
         </ion-item>
       </ion-list>
@@ -33,7 +60,7 @@
           <message-with-svg imageUrl="assets/img/empty.svg"
             messageTitle="It's empty here!" wrapperSize="4" [advancedMode]="true">
             <div class="flex-container ion-margin-top">
-              <h3 class="ion-text-center">Looks like you not pasted anything yet...</h3>
+              <h3 class="ion-text-center">Looks like you not pasted anything yet..</h3>
             </div>
           </message-with-svg>
         </ion-card-content>
