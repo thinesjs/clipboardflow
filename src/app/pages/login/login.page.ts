@@ -86,7 +86,6 @@ export class LoginPage implements OnInit {
           this.userAuthenticated = true;
 
           setTimeout(() => {
-            // Show the success message for 300 ms after completing the request
             const url = this.route.snapshot.queryParams.redirect || '/';
             this.router.navigateByUrl(url, {replaceUrl: true});
           }, 300);
@@ -99,7 +98,7 @@ export class LoginPage implements OnInit {
           return throwError(() => new Error('Invalid email or password'));
         }
       },error => {
-        if (error.error.msg.includes('Email or password is incorrect!')) {
+        if (error.error.msg.includes('Username or password is incorrect!') || error.error.msg.includes('Email or password is incorrect!')) {
           this.component.toastMessage('You have entered an invalid email or password.', 'danger');
           this.loginProcessLoading = false;
           this.userUnauthenticated = true;

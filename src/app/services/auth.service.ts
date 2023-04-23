@@ -14,7 +14,7 @@ export class AuthService {
 
   userInfo = new BehaviorSubject(null);
   jwtHelper = new JwtHelperService();
-  checkUserObs:Observable<any>;
+  checkUserObs: Observable<any>;
 
   constructor(
     private readonly storage: Storage,
@@ -26,7 +26,6 @@ export class AuthService {
 
   loadUserInfo() {
     let readyPlatformObs = from(this.platform.ready());
-
     this.checkUserObs = readyPlatformObs.pipe(
       switchMap(() => {
           return from(this.getAccessToken());
@@ -39,10 +38,14 @@ export class AuthService {
           this.userInfo.next(decodedUser);
           return true;
       }));
-    
   }
 
   getAccessToken(){
+    return this.storage.get("access_token");
+  }
+
+  getToken() : Promise<any>
+  {
     return this.storage.get("access_token");
   }
 
@@ -54,7 +57,6 @@ export class AuthService {
       };
       return this.http.post("https://clipboardflow.tjsserver.xyz/api/auth/login",payload).pipe(
       map((response:any)=>{
-        // console.log(response);
         this.storage.set('access_token',response.access_token);
         var decodedUser = this.jwtHelper.decodeToken(response.access_token);
         this.userInfo.next(decodedUser);
