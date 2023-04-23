@@ -46,7 +46,7 @@ export class ClipboardPage implements OnInit, ViewWillEnter {
   }
 
   createClipboard() {
-    console.log(`received ${this.clipboardName}`)
+    this.clipboardService.addClipboard(this.clipboardName);
   }
 
   doRefresh(event?) {

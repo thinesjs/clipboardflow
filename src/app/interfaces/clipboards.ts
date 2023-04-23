@@ -5,12 +5,12 @@ export interface Clipboards {
   created_on: string
 }
 
-// export interface Clipboard {
-//   id: number;
-//   title: string;
-//   created_by: string;
-//   created_on: Date | string;
-// }
+export interface AddClipboard {
+  id: number;
+  title: string;
+  created_by: string;
+  created_on: Date | string;
+}
 
 export interface MappedClipboard {
   attendances: Clipboards[];
