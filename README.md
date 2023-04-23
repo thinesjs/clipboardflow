@@ -21,7 +21,8 @@ Currently, ClipboardFlow is still in local development.
 
 ## Known Issues
 
-1. Ionic Storage bug - A reload is necessary for the API to function corrently after logging in
+1. Ionic Storage bug - A reload is necessary for the API to function corrently after logging in.
+2. Refresh Token - No refresh token endpoint, token is only valid for 60mins. TEMP FIX: logout (/logout) and login again.
     
 ## License
 
