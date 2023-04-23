@@ -5,21 +5,31 @@ import { ComponentService } from './component.service';
 import { ConfigurationsService } from './configurations.service';
 import { Observable, switchMap, tap, timeout, catchError, throwError, from, of, retryWhen, concatMap, iif, delay, concat, EMPTY, NEVER, AsyncSubject, share } from 'rxjs';
 import { Storage } from '@ionic/storage-angular';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
-  private apiUrl = 'https://clipboardflow.tjsserver.xyz/api/';
+  private apiUrl = 'https://clipboardflow.tjsserver.xyz/api';
+
+  token = null;
+  userid = null;
 
   constructor(
     public http: HttpClient,
     public plt: Platform,
     public storage: Storage,
     private component: ComponentService,
-    private config: ConfigurationsService
-  ) { }
+    private config: ConfigurationsService,
+    private authService: AuthService
+  ) { this.loadTokens(); }
+
+  async loadTokens() {
+    this.token = await this.authService.getToken();
+    this.userid = await this.authService.getUserID();
+  }
 
   /**
    * GET: Request WS API with cache (mobile only) and error handling.
@@ -52,7 +62,7 @@ export class ApiService {
       attempts: 4,
       auth: true,
       caching: 'network-or-cache',
-      headers: {},
+      headers: {'Authorization': `Bearer ${this.token}`},
       params: {},
       timeout: 20000,
       url: this.apiUrl,
@@ -128,7 +138,7 @@ export class ApiService {
     options = {
       auth: true,
       body: null,
-      headers: {},
+      headers: {'Authorization': `Bearer ${this.token}`},
       params: {},
       timeout: 10000,
       url: this.apiUrl,
@@ -181,7 +191,7 @@ export class ApiService {
     options = {
       auth: true,
       body: null,
-      headers: {},
+      headers: {'Authorization': `Bearer ${this.token}`},
       params: {},
       timeout: 10000,
       url: this.apiUrl,
@@ -229,7 +239,7 @@ export class ApiService {
   } = {}): Observable<T> {
     options = {
       auth: true,
-      headers: {},
+      headers: {'Authorization': `Bearer ${this.token}`},
       params: {},
       timeout: 10000,
       url: this.apiUrl,

@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Clipboards, MappedClipboard } from '../../interfaces/clipboards';
-import { IonContent, ViewWillEnter } from '@ionic/angular';
-import { ConfigurationsService } from 'src/app/services';
+import { IonContent, LoadingController, ViewWillEnter } from '@ionic/angular';
+import { ComponentService, ConfigurationsService, ApiService } from 'src/app/services';
 import { ClipboardService } from 'src/app/services/clipboard.service';
 import { Observable, finalize, map, tap } from 'rxjs';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-clipboard',
@@ -17,13 +18,17 @@ export class ClipboardPage implements OnInit, ViewWillEnter {
   attendance$: Observable<MappedClipboard[]>;
 
   clipboard$: Observable<Clipboards[]>;
-  skeleton =  new Array(2);
+  skeleton =  new Array(4);
   hideHeader: boolean;
   clipboardName: string;
+  // loading: HTMLIonLoadingElement;
 
   constructor(
     private config: ConfigurationsService,
-    private clipboardService: ClipboardService
+    private clipboardService: ClipboardService,
+    private apiService: ApiService,
+    private component: ComponentService,
+    private loadingCtrl: LoadingController,
   ) { }
 
   ngOnInit() {
@@ -46,7 +51,30 @@ export class ClipboardPage implements OnInit, ViewWillEnter {
   }
 
   createClipboard() {
-    this.clipboardService.addClipboard(this.clipboardName);
+    this.loadingCtrl.create();
+    const body = new HttpParams({ fromObject: { "title": this.clipboardName } });
+    this.apiService.post<any>('/clipboard', {
+      body
+    })
+      .subscribe({
+        next: () => {
+          this.loadingCtrl.dismiss();
+          this.doRefresh();
+          this.component.toastMessage(
+            'Clipboard created successfully!',
+            'success'
+          );
+        },
+        error: (err) => {
+          this.component.toastMessage(
+            err.status + ': ' + err.error.error,
+            'danger'
+          );
+        },
+        complete: () => {
+          this.loadingCtrl.dismiss();
+        }
+      });
   }
 
   doRefresh(event?) {

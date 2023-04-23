@@ -1,4 +1,4 @@
-// export { ApiService } from './api.service';
+export { ApiService } from './api.service';
 // export { AppLauncherService } from './app-launcher.service'
 // export { CasTicketService } from './cas-ticket.service';
 export { ComponentService } from './component.service';
