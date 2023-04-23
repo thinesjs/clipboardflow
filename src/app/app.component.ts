@@ -31,7 +31,7 @@ export class AppComponent {
     // }
 
     this.plt.ready().then(() => {
-      this.checkForUpdate();
+      // this.checkForUpdate();
     });
   }
 

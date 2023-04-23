@@ -49,6 +49,11 @@ export class AuthService {
     return this.storage.get("access_token");
   }
 
+  getUserID() : Promise<any>
+  {
+    return this.storage.get("user_id");
+  }
+
   useLogin(email: string, password: string): Observable<boolean> {
     if(email && password){
       var payload={
@@ -58,6 +63,7 @@ export class AuthService {
       return this.http.post("https://clipboardflow.tjsserver.xyz/api/auth/login",payload).pipe(
       map((response:any)=>{
         this.storage.set('access_token',response.access_token);
+        this.storage.set('user_id',response.user.id);
         var decodedUser = this.jwtHelper.decodeToken(response.access_token);
         this.userInfo.next(decodedUser);
         // console.log(decodedUser);

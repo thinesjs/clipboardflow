@@ -37,7 +37,7 @@
             </ng-container>
             <ion-button class="ion-margin-top" size="small" (click)="createClipboard()">
             Create Clipboard
-            <ion-icon slot="end" name="print"></ion-icon>
+            <ion-icon slot="end" name="add-circle-outline"></ion-icon>
           </ion-button>
           </ion-card-header>
           <ion-progress-bar color="success"
@@ -61,8 +61,8 @@
                   <ion-label class="ion-text-wrap">
                     <h3>{{ item.title }}</h3>
                     <ion-row class="ion-no-padding">
-                      <ion-col size="6" class="ion-no-padding col-padding">
-                        <small>Total Pastes:</small>
+                      <ion-col size="12" class="ion-no-padding col-padding">
+                        <small>Created: <b>{{ item.created_on | date: "dd MMM yyyy - HH:MM a" }}</b></small>
                       </ion-col>
                     </ion-row>
                   </ion-label>
@@ -74,17 +74,9 @@
             <ion-card class="ion-no-margin ion-margin-top">
               <ion-card-content>
                 <message-with-svg imageUrl="assets/img/empty.svg"
-                  messageTitle="It's empty here!" [advancedMode]="true">
-                  <div class="flex-container">
-                    <ul class="list-txt-color">
-                      <li>You have no clipboards!</li>
-                      <li>Uh.. why not create a clipboard for fun?</li>
-                    </ul>
-
-                    <p>Still having issues? No worries! Just
-                      <a tappable class="glob-text-bold">REPORT</a>
-                      it to us.
-                    </p>
+                  messageTitle="It's empty here!" wrapperSize="4" [advancedMode]="true">
+                  <div class="flex-container ion-margin-top">
+                    <h3 class="ion-text-center">Looks like you have no clipboards. Uh.. why not create a clipboard for fun?</h3>
                   </div>
                 </message-with-svg>
               </ion-card-content>
@@ -106,41 +98,6 @@
           </ion-card>
         </ng-template>
       </ion-col>
-
-      <!-- <ion-col size="12" size-md="8" pull-md="4">
-        <ng-container >
-          <ion-card class="ion-no-margin ion-margin-top" [ngClass]="'ion-margin-bottom'">
-            <ion-item-divider color="light" mode="md">
-              <ion-label color="primary" class="semester-title">
-                Clipboards
-              </ion-label>
-            </ion-item-divider>
-
-            <ion-item [lines]="'none'"
-              detail="true" button="true" mode="md">
-              <ion-label class="ion-text-wrap">
-                <h3>Module 1</h3>
-                <ion-row class="ion-no-padding">
-                  <ion-col size="6" class="ion-no-padding col-padding">
-                    <small>Total Pastes: <span class="medium-size-text"
-                        [ngClass]="'glob-success-text'">
-                        2
-                      </span>
-                    </small>
-                  </ion-col>
-                  <ion-col size="6" class="ion-no-padding col-padding">
-                    <small>Created: <span class="medium-size-text"
-                        [ngClass]="'glob-success-text'">
-                        22-04-2023
-                      </span>
-                    </small>
-                  </ion-col>
-                </ion-row>
-              </ion-label>
-            </ion-item>
-          </ion-card>
-        </ng-container>
-      </ion-col> -->
     </ion-row>
   </div>
 </ion-content>

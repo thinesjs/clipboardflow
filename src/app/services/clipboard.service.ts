@@ -14,8 +14,12 @@ const ACCESS_TOKEN_KEY = 'my-access-token';
 })
 export class ClipboardService {
   
-  baseUrlUser = 'https://clipboardflow.tjsserver.xyz/api/clipboard/user'; 
+  baseUrlByUser = 'https://clipboardflow.tjsserver.xyz/api/clipboard/user'; 
+  baseUrlAddClipboard = 'https://clipboardflow.tjsserver.xyz/api/clipboard/' //post payload - title
+  baseUrlAddPaste = 'http://clipboardflow.tjsserver.xyz/api/clipboard/{id}' //post payload  - text
+
   token = null;
+  userid = null;
 
   constructor(
     private readonly platform: Platform,
@@ -27,21 +31,17 @@ export class ClipboardService {
 
   async loadToken() {
     this.token = await this.authService.getToken();
+    this.userid = await this.authService.getUserID();
   }
 
-  getClipboardsByUser(userid: string) :Observable<Clipboards[]> {
+  getClipboardsByUser() :Observable<Clipboards[]> {
     const httpOptions = {
       headers: {
         'Authorization': `Bearer ${this.token}`
       }
     }
-    return this.http.get<Clipboards[]>(`${this.baseUrlUser}/${userid}`, httpOptions);
+    return this.http.get<Clipboards[]>(`${this.baseUrlByUser}/${this.userid}`, httpOptions);
   }
-
-  // getClipboardsByUser(refresh: boolean): Observable<Clipboards[]> {
-  //   return this.http.get<Clipboards[]>(`${this.baseUrlUser}/5`);
-  // }
-
 
   getClipboardPastes()
   {

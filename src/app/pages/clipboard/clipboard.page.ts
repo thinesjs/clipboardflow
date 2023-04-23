@@ -50,11 +50,24 @@ export class ClipboardPage implements OnInit, ViewWillEnter {
   }
 
   doRefresh(event?) {
-    this.clipboard$ = this.clipboardService.getClipboardsByUser('4'),finalize(() => {
+    this.clipboard$ = this.clipboardService.getClipboardsByUser(),finalize(() => {
       if (event) {
         event.target.complete();
       }
     })
   }
+
+  // async attendanceDetails(module: Attendance, intakeCode: string) {
+  //   const modal = await this.modalCtrl.create({
+  //     component: AttendanceDetailsModalPage,
+  //     componentProps: {
+  //       module,
+  //       intake: intakeCode
+  //     },
+  //     breakpoints: [0, 1],
+  //     initialBreakpoint: 1
+  //   });
+  //   await modal.present();
+  // }
 
 }
