@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Clipboards, MappedClipboard } from '../../interfaces/clipboards';
-import { IonContent, LoadingController, ViewWillEnter } from '@ionic/angular';
+import { IonContent, ViewWillEnter } from '@ionic/angular';
 import { ComponentService, ConfigurationsService, ApiService } from 'src/app/services';
 import { ClipboardService } from 'src/app/services/clipboard.service';
 import { Observable, finalize, map, tap } from 'rxjs';
@@ -21,14 +21,17 @@ export class ClipboardPage implements OnInit, ViewWillEnter {
   skeleton =  new Array(4);
   hideHeader: boolean;
   clipboardName: string;
-  // loading: HTMLIonLoadingElement;
+
+  userDidCreate = false;
+  creationProcessLoading = false;
+  createSuccess = false;
+  createFail = false;
 
   constructor(
     private config: ConfigurationsService,
     private clipboardService: ClipboardService,
     private apiService: ApiService,
     private component: ComponentService,
-    private loadingCtrl: LoadingController,
   ) { }
 
   ngOnInit() {
@@ -51,28 +54,42 @@ export class ClipboardPage implements OnInit, ViewWillEnter {
   }
 
   createClipboard() {
-    this.loadingCtrl.create();
+    this.userDidCreate = true;
+    this.creationProcessLoading = true;
+
     const body = new HttpParams({ fromObject: { "title": this.clipboardName } });
     this.apiService.post<any>('/clipboard', {
       body
     })
       .subscribe({
         next: () => {
-          this.loadingCtrl.dismiss();
+          this.creationProcessLoading = false;
+          this.createSuccess = true;
+
           this.doRefresh();
+
           this.component.toastMessage(
             'Clipboard created successfully!',
             'success'
           );
         },
         error: (err) => {
+          this.creationProcessLoading = false;
+          this.createFail = true;
+          
+
+          this.doRefresh();
+
           this.component.toastMessage(
             err.status + ': ' + err.error.error,
             'danger'
           );
         },
         complete: () => {
-          this.loadingCtrl.dismiss();
+          setTimeout(() => {
+            this.createFail = false;
+            this.userDidCreate = false;
+          }, 3000);
         }
       });
   }

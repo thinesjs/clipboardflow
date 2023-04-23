@@ -36,10 +36,28 @@
               </ng-template>
             </ng-container>
             <!-- create button -->
-            <ion-button class="ion-margin-top" size="small" (click)="createClipboard()">
-            Create Clipboard
-            <ion-icon slot="end" name="add-circle-outline"></ion-icon>
-          </ion-button>
+            <ion-col size="12" class="ion-no-padding">
+              <ion-button class="ion-margin-top" size="small" (click)="createClipboard()" 
+              [attr.color]="userDidCreate && createFail ? 'danger' : userDidCreate && createSuccess? 'success': 'primary'"
+              [class.btn_center]="userDidCreate && (createFail || creationProcessLoading || createSuccess)"
+              [disabled]="userDidCreate && createFail ? 'true' : userDidCreate && createSuccess? 'true': 'false'">
+                <!-- login text -->
+                <span *ngIf="!userDidCreate" class="ion-text-capitalize">Create Clipboard</span>
+                <!-- loading -->
+                <ion-icon *ngIf="!userDidCreate" name="add-circle-outline" slot="end"></ion-icon>
+                <span *ngIf="userDidCreate && creationProcessLoading">
+                  <ion-spinner name="dots"></ion-spinner>
+                </span>
+                <!-- 200 -->
+                <span *ngIf="userDidCreate && createSuccess">
+                  <ion-icon name="checkmark-circle-outline" slot="end"></ion-icon>
+                </span>
+                <!-- err -->
+                <span *ngIf="userDidCreate && createFail">
+                  <ion-icon name="close-circle-outline" slot="end"></ion-icon>
+                </span>
+              </ion-button>
+            </ion-col>
           </ion-card-header>
           <ion-progress-bar color="success"
             [value]="1"></ion-progress-bar>
