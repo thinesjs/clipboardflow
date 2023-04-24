@@ -25,10 +25,7 @@
                 [attr.color]="userDidAddText && addingFailed ? 'danger' : userDidAddText && addingSuccess? 'success': 'primary'"
                 [class.btn_center]="userDidAddText && (addingFailed || addingProcessing || addingSuccess)"
                 [disabled]="userDidAddText && addingFailed ? 'true' : userDidAddText && addingSuccess? 'true': 'false'">
-    
-    
           <ion-icon *ngIf="!userDidAddText" name="add-outline"></ion-icon>
-    
           <span *ngIf="userDidAddText && addingProcessing">
             <ion-spinner name="dots"></ion-spinner>
           </span>
@@ -49,12 +46,30 @@
           </ion-buttons>
           <ion-label>
             <h2>{{ item.message }}</h2>
-            <p>Added on {{ item.created_on | date: "dd MMM yyyy - HH:MM a" }}</p>
+            <p>Added on {{ item.created_on | date: "dd MMM yyyy - h:mm a" }}</p>
           </ion-label>
         </ion-item>
       </ion-list>
     </ng-container>
     <ng-template #noClipboard>
+      <ion-item class="ion-margin-bottom ion-margin-top ion-no-padding">
+        <ion-input [placeholder]="'Add your first text to '+clipboard.clipboard_title" [(ngModel)]="clipboardText" clear-on-edit="false" (keyup.enter)="addToClipboard()"[required]="true" name="clipboardText"></ion-input>
+        <ion-button type="button" clear slot="end" (click)="addToClipboard()"
+                [attr.color]="userDidAddText && addingFailed ? 'danger' : userDidAddText && addingSuccess? 'success': 'primary'"
+                [class.btn_center]="userDidAddText && (addingFailed || addingProcessing || addingSuccess)"
+                [disabled]="userDidAddText && addingFailed ? 'true' : userDidAddText && addingSuccess? 'true': 'false'">
+          <ion-icon *ngIf="!userDidAddText" name="add-outline"></ion-icon>
+          <span *ngIf="userDidAddText && addingProcessing">
+            <ion-spinner name="dots"></ion-spinner>
+          </span>
+          <span *ngIf="userDidAddText && addingSuccess">
+            <ion-icon name="checkmark-circle-outline" slot="end"></ion-icon>
+          </span>
+          <span *ngIf="userDidAddText && addingFailed">
+            <ion-icon name="close-circle-outline" slot="end"></ion-icon>
+          </span>
+        </ion-button>
+      </ion-item>
       <ion-card class="ion-margin-top">
         <ion-card-content>
           <message-with-svg imageUrl="assets/img/empty.svg"

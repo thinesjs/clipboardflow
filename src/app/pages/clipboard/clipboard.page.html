@@ -69,7 +69,7 @@
             <ng-container>
               <ion-card class="ion-margin-top" [ngClass]="!isLast ? 'ion-margin-bottom' : undefined">
                 <ion-item-divider color="light" mode="md">
-                  <ion-label color="primary" class="semester-title">
+                  <ion-label color="dark" class="semester-title">
                     Clipboard(s)
                   </ion-label>
                 </ion-item-divider>
@@ -80,7 +80,7 @@
                     <h3>{{ item.title }}</h3>
                     <ion-row class="ion-no-padding">
                       <ion-col size="12" class="ion-no-padding col-padding">
-                        <small>Created on <b>{{ item.created_on | date: "dd MMM yyyy - HH:MM a" }}</b></small>
+                        <small>Created on <b>{{ item.created_on | date: "dd MMM yyyy - h:mm a" }}</b></small>
                       </ion-col>
                     </ion-row>
                   </ion-label>
