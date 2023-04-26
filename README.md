@@ -6,7 +6,7 @@ ClipboardFlow is an web and mobile application to seamlessly share clipboards wh
 
 ## Preview
 
-Currently, ClipboardFlow is still in local development. 
+Development preview is available at https://clipboardflow.thinesjs.com
 
 ## To-Do
 
@@ -21,8 +21,12 @@ Currently, ClipboardFlow is still in local development.
 
 ## Known Issues
 
-1. Ionic Storage bug - A reload is necessary for the API to function corrently after logging in.
-2. Refresh Token - No refresh token endpoint, token is only valid for 60mins. TEMP FIX: logout (/logout) and login again.
+1. Ionic Storage bug - A reload is necessary for the API to function corrently after logging in. (FIXED)
+2. Refresh Token - No refresh token endpoint, token is only valid for 60mins. TEMP FIX: logout (/logout) and login again. (FIXED)
+
+## Commits
+
+Since i have pushed the commits to the web sever, future commits wouldn't be made often to GitHub. 
     
 ## License
 
