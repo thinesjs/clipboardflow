@@ -15,9 +15,11 @@ Development preview is available at https://clipboardflow.thinesjs.com
 | Authentication API - ✅ | Authentication - ✅ |
 | Create Clipboard API - ✅ | Create Clipboard - ✅ |
 | Retrive Clipboard by Owner ID API - ✅ | Retrive Clipboard by Owner ID - ✅ |
-| Update Clipboard API - ❌ | Update Clipboard - ❌ |
+| Update Clipboard API - ✅ | Update Clipboard - ✅ |
 | Delete Clipboard API - ❌ | Delete Clipboard - ❌ |
-| Profile - ✅ | Profile - ❌ |
+| Profile - ✅ | Profile - ✅ |
+| Access Control - ❌ | Access Control - ❌ |
+| Guest functionality - ❌ | Guest functionality - ❌ |
 
 ## Known Issues
 
