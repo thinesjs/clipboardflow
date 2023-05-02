@@ -1,7 +1,7 @@
 <p align="center"><a href="https://clipboardflow.thinesjs.com" target="_blank"><img src="https://clipboardflow.thinesjs.com/assets/icon/logo.svg" width="400" alt="ClipboardFlow Logo"></a></p>
 
 <h3 align="center">ClipboardFlow</h3>
-# ClipboardFlow
+## ClipboardFlow
 
 ClipboardFlow is an web and mobile application to seamlessly share clipboards which allows users to paste in texts which can be copied by the users.
 
